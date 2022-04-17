@@ -87,7 +87,12 @@ app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
 });
 
 app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  const { todos } = request.user;
+  const todoId = request.params.id;
+  const todoToBeDeleted = todos.find(todo => todo.id === todoId);
+  todos.splice(todos.indexOf(todoToBeDeleted), 1);
+
+  return response.json({message: "todo deleted"});
 });
 
 module.exports = app;
