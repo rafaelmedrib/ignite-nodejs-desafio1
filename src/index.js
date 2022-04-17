@@ -17,7 +17,7 @@ function checksExistsUserAccount(request, response, next) {
 
   if(!user) {
     return response.status(404).json({
-      error: "Usuário não encontrado"
+      error: "user not found"
     });
   }
 
@@ -30,7 +30,7 @@ function checkTodoExists(request, response, next) {
   const todoId = request.params.id;
   const todoExists = todos.some(todo => todo.id === todoId);
   if(!todoExists) {
-    return response.status(404);
+    return response.status(404).json({error: "todo not found"});
   }
 
   request.id = todoId;
